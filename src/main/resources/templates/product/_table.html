@@ -1,0 +1,28 @@
+<div th:fragment="table">
+    <table border="1" style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Create Date</th>
+            <th>Available</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+        <th:block th:each="item : ${items}">
+            <tr>
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td><img th:src="${item.image}" alt="No Image" width="50"/></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${#dates.format(item.createDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${item.available ? 'Yes' : 'No'}"></td>
+                <td th:text="${item.category != null ? item.category.name : 'N/A'}"></td>
+                <td>
+                    <a th:href="@{|/product/edit/${item.id}|}">Edit</a>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</div>
