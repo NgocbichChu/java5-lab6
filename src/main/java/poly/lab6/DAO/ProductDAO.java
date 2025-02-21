@@ -13,12 +13,17 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Query("FROM Product o WHERE o.price BETWEEN ?1 AND ?2")
     List<Product> findByPrice(double minPrice, double maxPrice);
 
+    // Dùng DSL thay cho JPQL
+    List<Product> findByPriceBetween(double minPrice, double maxPrice);
+
     @Query("FROM Product o WHERE o.name LIKE ?1")
     Page<Product> findByKeywords(String keywords, Pageable pageable);
 
-    @Query("SELECT o.category AS group, sum(o.price) AS sum, count(o) AS count"
-            + " FROM Product o "
-            + " GROUP BY o.category"
-            + " ORDER BY sum(o.price) DESC")
+    Page<Product> findAllByNameLike(String keywords, Pageable pageable);
+
+    @Query("SELECT p.category AS group, SUM(p.price) AS sum, COUNT(p) AS count " +
+            "FROM Product p " +
+            "GROUP BY p.category " +
+            "ORDER BY SUM(p.price) DESC")
     List<Report> getInventoryByCategory();
 }

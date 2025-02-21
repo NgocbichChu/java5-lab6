@@ -97,7 +97,7 @@ public class ProductController {
                          @RequestParam("min") Optional<Double> min, @RequestParam("max") Optional<Double> max) {
         double minPrice = min.orElse(Double.MIN_VALUE);
         double maxPrice = max.orElse(Double.MAX_VALUE);
-        List<Product> items = productDAO.findByPrice(minPrice, maxPrice);
+        List<Product> items = productDAO.findByPriceBetween(minPrice, maxPrice);
         model.addAttribute("items", items);
         return "product/search";
     }
@@ -112,7 +112,7 @@ public class ProductController {
                 : "");
         session.setAttribute("keywords", kwords);
         Pageable pageable = PageRequest.of(p.orElse(0), 5);
-        Page<Product> page = productDAO.findByKeywords("%" + kwords + "%", pageable);
+        Page<Product> page = productDAO.findAllByNameLike("%" + kwords + "%", pageable);
         model.addAttribute("page", page);
         return "product/search-and-page";
     }

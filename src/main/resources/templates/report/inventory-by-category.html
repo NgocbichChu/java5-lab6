@@ -11,7 +11,7 @@
         <th>Tổng giá</th>
         <th>Số sản phẩm</th>
     </tr>
-    <th:block th:each="item, ${items}">
+    <th:block th:each="item : ${items}">
         <tr>
             <td th:text="${item.group.name}"></td>
             <td th:text="${item.sum}"></td>
