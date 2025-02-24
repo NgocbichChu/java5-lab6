@@ -10,12 +10,16 @@
         <th>Loại hàng</th>
         <th>Tổng giá</th>
         <th>Số sản phẩm</th>
+        <th>Giá trung bình</th>
     </tr>
     <th:block th:each="item : ${items}">
         <tr>
             <td th:text="${item.group.name}"></td>
             <td th:text="${item.sum}"></td>
             <td th:text="${item.count}"></td>
+            <td th:text="${item.average}"></td>
+
+
         </tr>
     </th:block>
 </table>

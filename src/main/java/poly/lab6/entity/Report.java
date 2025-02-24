@@ -6,4 +6,5 @@ public interface Report {
     Serializable getGroup();
     Double getSum();
     Long getCount();
+    Double getAverage();
 }
